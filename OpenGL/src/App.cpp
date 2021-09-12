@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -22,6 +24,8 @@ extern struct Reso {
 void ProcessInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    
+        
 
 
 }
@@ -34,11 +38,12 @@ int main(void)
 
     GLFWwindow* window;
     Reso* ScrRes;
+    std::string WindowName = "Hello";
 
     ScrRes = new Reso(800, 600);
 
     window = glfwCreateWindow(ScrRes->x, ScrRes->y, 
-                                          "Hello There", NULL, NULL);
+                                          WindowName.c_str(), NULL, NULL);
 
     glfwMakeContextCurrent(window);
     if (window == NULL)
@@ -59,6 +64,14 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         ProcessInput(window);
+        
+        #pragma region Render
+        glClearColor(0.439f, 0.502f, 0.565f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+
+        #pragma endregion
+
 
         glfwSwapBuffers(window);
         glfwPollEvents();
